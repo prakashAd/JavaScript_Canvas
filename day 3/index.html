@@ -19,13 +19,34 @@
 
       let x = 0;
       let y = 0;
+      const boxWidth = 50;
+      const boxHeight = 50;
+      let xSpeed = 1;
+      let ySpeed = 1;
 
       function renderBox() {
         c.beginPath();
-        c.rect(x, y, 50, 50);
+        c.rect(x, y, boxWidth, boxHeight);
         c.fill();
-        x = x + 1;
-        y = y + 1;
+        //check if box is going below the canvas boundaries
+        if (y + boxHeight + ySpeed >= canvas.height || y + ySpeed <= 0) {
+          //move the box up by a certain amount when it strikkes
+          y = canvas.height - boxHeight;
+
+          ySpeed += -1;
+          // to reverse the ySpeed to move upward
+        }
+
+        if (x + boxHeight + xSpeed >= canvas.width || y + xSpeed <= 0) {
+          //move the box up by a certain amount when it strikkes
+          x = canvas.width - boxWidth;
+
+          xSpeed += -1;
+          // to reverse the ySpeed to move upward
+        }
+
+        x = x + xSpeed;
+        y = y + ySpeed;
       }
 
       // Game Loop
